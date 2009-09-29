@@ -1,0 +1,82 @@
+;; -*- scheme -*-
+
+(define-object MathView
+  (in-module "GtkMathView")
+  (parent "GtkWidget")
+  (c-name "GtkMathView")
+  (gtype-id "GTK_TYPE_MATH_VIEW")
+)
+
+(define-function gtk_math_view_get_type
+  (c-name "gtk_math_view_get_type__libxml2")
+  (return-type "GtkType")
+)
+
+(define-function gtk_math_view_new
+  (c-name "gtk_math_view_new__libxml2")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GtkAdjustment*" "adj1")
+    '("GtkAdjustment*" "adj2")
+  )
+)
+
+(define-method freeze
+  (of-object "GtkMathView")
+  (c-name "gtk_math_view_freeze__libxml2")
+  (return-type "gboolean")
+)
+
+(define-method thaw
+  (of-object "GtkMathView")
+  (c-name "gtk_math_view_thaw__libxml2")
+  (return-type "gboolean")
+)
+
+(define-method update
+  (of-object "GtkMathView")
+  (c-name "gtk_math_view_update__libxml2")
+  (return-type "none")
+  (parameters
+    '("GdkRectangle*" "rect")
+  )
+)
+
+(define-method load_uri
+  (of-object "GtkMathView")
+  (c-name "gtk_math_view_load_uri__libxml2")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "uri")
+  )
+)
+
+(define-method load_buffer
+  (of-object "GtkMathView")
+  (c-name "gtk_math_view_load_buffer__libxml2")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "buffer")
+  )
+)
+
+(define-method unload
+  (of-object "GtkMathView")
+  (c-name "gtk_math_view_unload__libxml2")
+  (return-type "none")
+)
+
+(define-method set_font_size
+  (of-object "GtkMathView")
+  (c-name "gtk_math_view_set_font_size__libxml2")
+  (return-type "none")
+  (parameters
+    '("guint" "size")
+  )
+)
+
+(define-method get_font_size
+  (of-object "GtkMathView")
+  (c-name "gtk_math_view_get_font_size__libxml2")
+  (return-type "guint")
+)

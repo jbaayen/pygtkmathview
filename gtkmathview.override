@@ -1,0 +1,39 @@
+%%
+headers
+#include <Python.h>
+#define GTKMATHVIEW_USES_LIBXML2 1
+#define gtk_math_view_get_type gtk_math_view_get_type__libxml2
+#include <gtk/gtkmathview_common.h>
+#include "pygobject.h"
+
+/* This is apparently something you need to copy into every .override
+   file because of the code codegen.py generates. Craptastic. */
+gboolean
+static pygdk_rectangle_from_pyobject (PyObject     *object,
+                                      GdkRectangle *rectangle)
+{
+    g_return_val_if_fail (rectangle, FALSE);
+
+    if (pyg_boxed_check (object, GDK_TYPE_RECTANGLE))
+    {
+	*rectangle = *pyg_boxed_get (object, GdkRectangle);
+	return TRUE;
+    }
+    if (PyArg_ParseTuple (object, "iiii",
+                          &rectangle->x, &rectangle->y,
+                          &rectangle->width, &rectangle->height))
+	return TRUE;
+
+    PyErr_Clear ();
+    PyErr_SetString (PyExc_TypeError, "could not convert to GdkRectangle");
+    return FALSE;
+}
+%%
+modulename gtkmathview
+%%
+import gtk.Widget as PyGtkWidget_Type
+%%
+ignore-glob
+  *_get_type
+  *_get_type__libxml2
+%%
